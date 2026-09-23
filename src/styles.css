@@ -1,1 +1,119 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Outfit", sans-serif;
+  --font-sans: "Source Sans 3", sans-serif;
+
+  --color-brand-green: #3eb049;
+  --color-brand-green-dark: #2f8a38;
+  --color-brand-green-light: #5bc463;
+  --color-brand-blue: #00aeef;
+  --color-brand-blue-dark: #008fc4;
+  --color-brand-blue-light: #33bef2;
+  --color-brand-yellow: #f7c948;
+
+  --color-surface: #ffffff;
+  --color-surface-muted: #f4f7f5;
+  --color-ink: #0f1a14;
+  --color-ink-muted: #4a5a52;
+  --color-border: #e2ebe5;
+
+  --color-dark-surface: #0b1210;
+  --color-dark-surface-muted: #121c18;
+  --color-dark-ink: #f2f7f4;
+  --color-dark-ink-muted: #a8b8b0;
+  --color-dark-border: #24332c;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-ink antialiased bg-surface transition-colors duration-300;
+  }
+
+  .dark body,
+  html.dark body {
+    @apply bg-dark-surface text-dark-ink;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-brand-green/25 text-ink;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .gradient-hero {
+    background:
+      linear-gradient(135deg, rgba(62, 176, 73, 0.18) 0%, transparent 42%),
+      linear-gradient(225deg, rgba(0, 174, 239, 0.16) 0%, transparent 48%),
+      radial-gradient(ellipse at top, rgba(247, 201, 72, 0.12), transparent 55%);
+  }
+
+  .dark .gradient-hero {
+    background:
+      linear-gradient(135deg, rgba(62, 176, 73, 0.12) 0%, transparent 42%),
+      linear-gradient(225deg, rgba(0, 174, 239, 0.1) 0%, transparent 48%),
+      radial-gradient(ellipse at top, rgba(247, 201, 72, 0.06), transparent 55%);
+  }
+
+  .reveal {
+    animation: reveal-up 0.7s ease-out both;
+  }
+
+  .reveal-delay-1 {
+    animation-delay: 0.12s;
+  }
+
+  .reveal-delay-2 {
+    animation-delay: 0.24s;
+  }
+
+  .reveal-delay-3 {
+    animation-delay: 0.36s;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-soft {
+  animation: float-soft 5s ease-in-out infinite;
+}
